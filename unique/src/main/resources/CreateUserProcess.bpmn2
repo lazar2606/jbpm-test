@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/bpmn20" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="__gXA4MdMEeWOIfYZdTXkRw" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd" exporter="jBPM Designer" exporterVersion="6.2.0" expressionLanguage="http://www.mvel.org/2.0" targetNamespace="http://www.omg.org/bpmn20" typeLanguage="http://www.java.com/javaTypes">
+  <bpmn2:itemDefinition id="_messageItem" structureRef="demo.Message"/>
+  <bpmn2:process id="unique.CreateUserProcess" drools:packageName="org.jbpm" drools:version="1.0" name="CreateUserProcess">
+    <bpmn2:extensionElements>
+      <drools:import name="demo.Message"/>
+    </bpmn2:extensionElements>
+    <bpmn2:property id="message" itemSubjectRef="_messageItem"/>
+    <bpmn2:startEvent id="processStartEvent" drools:selectable="true" color:background-color="#9acd32" color:border-color="#000000" color:color="#000000" name="">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[]]></drools:metaValue>
+        </drools:metaData>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:documentation id="__gXn8MdMEeWOIfYZdTXkRw"><![CDATA[final String newProcessName = "unique.UserProcess";\nfinal Message o = (Message) kcontext.getVariable("message");\nSystem.out.println("z1 " + System.currentTimeMillis());\nif (o != null) {\n  boolean find = false;\n  org.kie.api.runtime.Environment env = kcontext.getKieRuntime().getEnvironment();  \n  org.kie.api.runtime.manager.audit.AuditService as = new org.jbpm.process.audit.JPAAuditLogService(env,org.jbpm.process.audit.strategy.PersistenceStrategyType.KIE_SESSION);\nSystem.out.println("z2 " + System.currentTimeMillis());\n  java.util.List<? extends org.kie.api.runtime.manager.audit.ProcessInstanceLog> processInstances = as.findActiveProcessInstances(newProcessName);\nSystem.out.println("z3 " + System.currentTimeMillis());\n  if (processInstances != null) for (org.kie.api.runtime.manager.audit.ProcessInstanceLog item : processInstances) {\n    \n  }\nSystem.out.println("z4 " + System.currentTimeMillis());\n  if (!find) {\n    java.util.Collection<org.kie.api.runtime.rule.FactHandle> facts = kcontext.getKnowledgeRuntime().getFactHandles();\n    for (org.kie.api.runtime.rule.FactHandle fact : facts) {\n        Object object = kcontext.getKnowledgeRuntime().getObject(fact);\n        if (object instanceof Message) {\n            final Integer v = ((Message) object).getIdUser();\n            if (v != null && v.equals(o.getIdUser())) {\n                kcontext.getKnowledgeRuntime().delete(fact);\n            }\n        }\n    }\n    final java.util.HashMap<String, Object> params = new java.util.HashMap<String, Object>();\n    params.put("idUser", o.getIdUser());\n    final org.kie.api.runtime.process.ProcessInstance instance = kcontext.getKnowledgeRuntime().startProcess(newProcessName, params);\n    System.out.println("z5 " + System.currentTimeMillis());\n    kcontext.getKnowledgeRuntime().insert(instance);\n  }\n  kcontext.getKnowledgeRuntime().insert(o);\n}]]></bpmn2:documentation>
+      <bpmn2:outgoing>_5E55C07E-2829-4500-80A4-7F1A565EFBE8</bpmn2:outgoing>
+    </bpmn2:startEvent>
+    <bpmn2:scriptTask id="_923D9705-42BC-4DC6-9437-048F788A2D04" drools:selectable="true" color:background-color="#fafad2" color:border-color="#000000" color:color="#000000" name="Create new process" scriptFormat="http://www.java.com/java">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[Create new process]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:documentation id="__gXn8cdMEeWOIfYZdTXkRw"><![CDATA[final String newProcessName = "unique.UserProcess";\nfinal Message o = (Message) kcontext.getVariable("message");\nSystem.out.println("z1 " + System.currentTimeMillis());\nif (o != null) {\n  boolean find = false;\n  org.kie.api.runtime.Environment env = kcontext.getKieRuntime().getEnvironment();  \n  org.kie.api.runtime.manager.audit.AuditService as = new org.jbpm.process.audit.JPAAuditLogService(env,org.jbpm.process.audit.strategy.PersistenceStrategyType.KIE_SESSION);\nSystem.out.println("z2 " + System.currentTimeMillis());\n  java.util.List<? extends org.kie.api.runtime.manager.audit.ProcessInstanceLog> processInstances = as.findActiveProcessInstances(newProcessName);\nSystem.out.println("z3 " + System.currentTimeMillis());\n  if (processInstances != null) for (org.kie.api.runtime.manager.audit.ProcessInstanceLog item : processInstances) {\n    \n  }\nSystem.out.println("z4 " + System.currentTimeMillis());\n  if (!find) {\n    java.util.Collection<org.kie.api.runtime.rule.FactHandle> facts = kcontext.getKnowledgeRuntime().getFactHandles();\n    for (org.kie.api.runtime.rule.FactHandle fact : facts) {\n        Object object = kcontext.getKnowledgeRuntime().getObject(fact);\n        if (object instanceof Message) {\n            final Integer v = ((Message) object).getIdUser();\n            if (v != null && v.equals(o.getIdUser())) {\n                kcontext.getKnowledgeRuntime().delete(fact);\n            }\n        }\n    }\n    final java.util.HashMap<String, Object> params = new java.util.HashMap<String, Object>();\n    params.put("idUser", o.getIdUser());\n    final org.kie.api.runtime.process.ProcessInstance instance = kcontext.getKnowledgeRuntime().startProcess(newProcessName, params);\n    System.out.println("z5 " + System.currentTimeMillis());\n    kcontext.getKnowledgeRuntime().insert(instance);\n  }\n  kcontext.getKnowledgeRuntime().insert(o);\n}]]></bpmn2:documentation>
+      <bpmn2:incoming>_5E55C07E-2829-4500-80A4-7F1A565EFBE8</bpmn2:incoming>
+      <bpmn2:outgoing>_FC5C3887-651F-4409-BC59-519679403434</bpmn2:outgoing>
+      <bpmn2:script><![CDATA[demo.CreateProcessor proc = new demo.CreateProcessor(kcontext, "unique.UserProcess");
+      proc.run();]]></bpmn2:script>
+    </bpmn2:scriptTask>
+    <bpmn2:endEvent id="_9742A891-4C12-4EAA-A817-901D6F6C060E" drools:selectable="true" color:background-color="#ff6347" color:border-color="#000000" color:color="#000000" name="">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[]]></drools:metaValue>
+        </drools:metaData>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:documentation id="__gXn8sdMEeWOIfYZdTXkRw"><![CDATA[final String newProcessName = "unique.UserProcess";\nfinal Message o = (Message) kcontext.getVariable("message");\nSystem.out.println("z1 " + System.currentTimeMillis());\nif (o != null) {\n  boolean find = false;\n  org.kie.api.runtime.Environment env = kcontext.getKieRuntime().getEnvironment();  \n  org.kie.api.runtime.manager.audit.AuditService as = new org.jbpm.process.audit.JPAAuditLogService(env,org.jbpm.process.audit.strategy.PersistenceStrategyType.KIE_SESSION);\nSystem.out.println("z2 " + System.currentTimeMillis());\n  java.util.List<? extends org.kie.api.runtime.manager.audit.ProcessInstanceLog> processInstances = as.findActiveProcessInstances(newProcessName);\nSystem.out.println("z3 " + System.currentTimeMillis());\n  if (processInstances != null) for (org.kie.api.runtime.manager.audit.ProcessInstanceLog item : processInstances) {\n    \n  }\nSystem.out.println("z4 " + System.currentTimeMillis());\n  if (!find) {\n    java.util.Collection<org.kie.api.runtime.rule.FactHandle> facts = kcontext.getKnowledgeRuntime().getFactHandles();\n    for (org.kie.api.runtime.rule.FactHandle fact : facts) {\n        Object object = kcontext.getKnowledgeRuntime().getObject(fact);\n        if (object instanceof Message) {\n            final Integer v = ((Message) object).getIdUser();\n            if (v != null && v.equals(o.getIdUser())) {\n                kcontext.getKnowledgeRuntime().delete(fact);\n            }\n        }\n    }\n    final java.util.HashMap<String, Object> params = new java.util.HashMap<String, Object>();\n    params.put("idUser", o.getIdUser());\n    final org.kie.api.runtime.process.ProcessInstance instance = kcontext.getKnowledgeRuntime().startProcess(newProcessName, params);\n    System.out.println("z5 " + System.currentTimeMillis());\n    kcontext.getKnowledgeRuntime().insert(instance);\n  }\n  kcontext.getKnowledgeRuntime().insert(o);\n}]]></bpmn2:documentation>
+      <bpmn2:incoming>_FC5C3887-651F-4409-BC59-519679403434</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:sequenceFlow id="_5E55C07E-2829-4500-80A4-7F1A565EFBE8" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="processStartEvent" targetRef="_923D9705-42BC-4DC6-9437-048F788A2D04">
+      <bpmn2:documentation id="__gXn88dMEeWOIfYZdTXkRw"><![CDATA[final String newProcessName = "unique.UserProcess";\nfinal Message o = (Message) kcontext.getVariable("message");\nSystem.out.println("z1 " + System.currentTimeMillis());\nif (o != null) {\n  boolean find = false;\n  org.kie.api.runtime.Environment env = kcontext.getKieRuntime().getEnvironment();  \n  org.kie.api.runtime.manager.audit.AuditService as = new org.jbpm.process.audit.JPAAuditLogService(env,org.jbpm.process.audit.strategy.PersistenceStrategyType.KIE_SESSION);\nSystem.out.println("z2 " + System.currentTimeMillis());\n  java.util.List<? extends org.kie.api.runtime.manager.audit.ProcessInstanceLog> processInstances = as.findActiveProcessInstances(newProcessName);\nSystem.out.println("z3 " + System.currentTimeMillis());\n  if (processInstances != null) for (org.kie.api.runtime.manager.audit.ProcessInstanceLog item : processInstances) {\n    \n  }\nSystem.out.println("z4 " + System.currentTimeMillis());\n  if (!find) {\n    java.util.Collection<org.kie.api.runtime.rule.FactHandle> facts = kcontext.getKnowledgeRuntime().getFactHandles();\n    for (org.kie.api.runtime.rule.FactHandle fact : facts) {\n        Object object = kcontext.getKnowledgeRuntime().getObject(fact);\n        if (object instanceof Message) {\n            final Integer v = ((Message) object).getIdUser();\n            if (v != null && v.equals(o.getIdUser())) {\n                kcontext.getKnowledgeRuntime().delete(fact);\n            }\n        }\n    }\n    final java.util.HashMap<String, Object> params = new java.util.HashMap<String, Object>();\n    params.put("idUser", o.getIdUser());\n    final org.kie.api.runtime.process.ProcessInstance instance = kcontext.getKnowledgeRuntime().startProcess(newProcessName, params);\n    System.out.println("z5 " + System.currentTimeMillis());\n    kcontext.getKnowledgeRuntime().insert(instance);\n  }\n  kcontext.getKnowledgeRuntime().insert(o);\n}]]></bpmn2:documentation>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="_FC5C3887-651F-4409-BC59-519679403434" drools:selectable="true" color:background-color="#000000" color:border-color="#000000" color:color="#000000" sourceRef="_923D9705-42BC-4DC6-9437-048F788A2D04" targetRef="_9742A891-4C12-4EAA-A817-901D6F6C060E">
+      <bpmn2:documentation id="__gXn9MdMEeWOIfYZdTXkRw"><![CDATA[final String newProcessName = "unique.UserProcess";\nfinal Message o = (Message) kcontext.getVariable("message");\nSystem.out.println("z1 " + System.currentTimeMillis());\nif (o != null) {\n  boolean find = false;\n  org.kie.api.runtime.Environment env = kcontext.getKieRuntime().getEnvironment();  \n  org.kie.api.runtime.manager.audit.AuditService as = new org.jbpm.process.audit.JPAAuditLogService(env,org.jbpm.process.audit.strategy.PersistenceStrategyType.KIE_SESSION);\nSystem.out.println("z2 " + System.currentTimeMillis());\n  java.util.List<? extends org.kie.api.runtime.manager.audit.ProcessInstanceLog> processInstances = as.findActiveProcessInstances(newProcessName);\nSystem.out.println("z3 " + System.currentTimeMillis());\n  if (processInstances != null) for (org.kie.api.runtime.manager.audit.ProcessInstanceLog item : processInstances) {\n    \n  }\nSystem.out.println("z4 " + System.currentTimeMillis());\n  if (!find) {\n    java.util.Collection<org.kie.api.runtime.rule.FactHandle> facts = kcontext.getKnowledgeRuntime().getFactHandles();\n    for (org.kie.api.runtime.rule.FactHandle fact : facts) {\n        Object object = kcontext.getKnowledgeRuntime().getObject(fact);\n        if (object instanceof Message) {\n            final Integer v = ((Message) object).getIdUser();\n            if (v != null && v.equals(o.getIdUser())) {\n                kcontext.getKnowledgeRuntime().delete(fact);\n            }\n        }\n    }\n    final java.util.HashMap<String, Object> params = new java.util.HashMap<String, Object>();\n    params.put("idUser", o.getIdUser());\n    final org.kie.api.runtime.process.ProcessInstance instance = kcontext.getKnowledgeRuntime().startProcess(newProcessName, params);\n    System.out.println("z5 " + System.currentTimeMillis());\n    kcontext.getKnowledgeRuntime().insert(instance);\n  }\n  kcontext.getKnowledgeRuntime().insert(o);\n}]]></bpmn2:documentation>
+    </bpmn2:sequenceFlow>
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram id="__gYPAMdMEeWOIfYZdTXkRw">
+    <bpmndi:BPMNPlane id="__gYPAcdMEeWOIfYZdTXkRw" bpmnElement="unique.CreateUserProcess">
+      <bpmndi:BPMNShape id="__gYPAsdMEeWOIfYZdTXkRw" bpmnElement="processStartEvent">
+        <dc:Bounds height="30.0" width="30.0" x="120.0" y="165.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="__gYPA8dMEeWOIfYZdTXkRw" bpmnElement="_923D9705-42BC-4DC6-9437-048F788A2D04">
+        <dc:Bounds height="80.0" width="100.0" x="210.0" y="140.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="__gYPBMdMEeWOIfYZdTXkRw" bpmnElement="_9742A891-4C12-4EAA-A817-901D6F6C060E">
+        <dc:Bounds height="28.0" width="28.0" x="385.0" y="166.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="__gYPBcdMEeWOIfYZdTXkRw" bpmnElement="_5E55C07E-2829-4500-80A4-7F1A565EFBE8">
+        <di:waypoint xsi:type="dc:Point" x="135.0" y="180.0"/>
+        <di:waypoint xsi:type="dc:Point" x="260.0" y="180.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="__gYPBsdMEeWOIfYZdTXkRw" bpmnElement="_FC5C3887-651F-4409-BC59-519679403434">
+        <di:waypoint xsi:type="dc:Point" x="260.0" y="180.0"/>
+        <di:waypoint xsi:type="dc:Point" x="399.0" y="180.0"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmn2:relationship id="__gYPB8dMEeWOIfYZdTXkRw" type="BPSimData">
+    <bpmn2:extensionElements>
+      <bpsim:BPSimData>
+        <bpsim:Scenario xsi:type="bpsim:Scenario" id="default" name="Simulationscenario">
+          <bpsim:ScenarioParameters xsi:type="bpsim:ScenarioParameters" baseTimeUnit="min"/>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_923D9705-42BC-4DC6-9437-048F788A2D04" id="__gY2EMdMEeWOIfYZdTXkRw">
+            <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
+              <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
+                <bpsim:UniformDistribution max="10.0" min="5.0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+            <bpsim:CostParameters xsi:type="bpsim:CostParameters">
+              <bpsim:UnitCost xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="0.0"/>
+              </bpsim:UnitCost>
+            </bpsim:CostParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_FC5C3887-651F-4409-BC59-519679403434" id="__gY2EcdMEeWOIfYZdTXkRw">
+            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
+              <bpsim:Probability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="100.0"/>
+              </bpsim:Probability>
+            </bpsim:ControlParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_9742A891-4C12-4EAA-A817-901D6F6C060E" id="__gY2EsdMEeWOIfYZdTXkRw">
+            <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
+              <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
+                <bpsim:UniformDistribution max="10.0" min="5.0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="processStartEvent" id="__gY2E8dMEeWOIfYZdTXkRw">
+            <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
+              <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
+                <bpsim:UniformDistribution max="10.0" min="5.0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
+              <bpsim:Probability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="100.0"/>
+              </bpsim:Probability>
+            </bpsim:ControlParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_5E55C07E-2829-4500-80A4-7F1A565EFBE8" id="__gY2FMdMEeWOIfYZdTXkRw">
+            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
+              <bpsim:Probability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="100.0"/>
+              </bpsim:Probability>
+            </bpsim:ControlParameters>
+          </bpsim:ElementParameters>
+        </bpsim:Scenario>
+      </bpsim:BPSimData>
+    </bpmn2:extensionElements>
+    <bpmn2:source>__gXA4MdMEeWOIfYZdTXkRw</bpmn2:source>
+    <bpmn2:target>__gXA4MdMEeWOIfYZdTXkRw</bpmn2:target>
+  </bpmn2:relationship>
+</bpmn2:definitions>

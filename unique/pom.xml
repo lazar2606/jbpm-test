@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>demo</groupId>
+    <artifactId>unique</artifactId>
+    <version>1.0</version>
+    <name>unique</name>
+    <description>Create unique process for each user</description>
+    <properties>
+        <kie-version>6.3.0.Final</kie-version>
+    </properties>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.kie</groupId>
+                <artifactId>kie-maven-plugin</artifactId>
+                <version>${kie-version}</version>
+                <extensions>true</extensions>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencies>
+        <dependency>
+            <groupId>org.drools</groupId>
+            <artifactId>drools-core</artifactId>
+            <version>${kie-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jbpm</groupId>
+            <artifactId>jbpm-audit</artifactId>
+            <version>${kie-version}</version>
+        </dependency>
+    </dependencies>
+</project>
